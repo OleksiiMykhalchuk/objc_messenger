@@ -1,0 +1,5 @@
+included:
+- objcApp
+excluded:
+  - Carthage
+  - Pods

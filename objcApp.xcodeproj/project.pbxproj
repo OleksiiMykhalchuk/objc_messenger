@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E34B7480C507695EECAE7BD /* Pods_objcApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0831113C684F93ED27B97824 /* Pods_objcApp.framework */; };
 		882A9D39286A6799009F356A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 882A9D38286A6799009F356A /* AppDelegate.m */; };
 		882A9D3C286A6799009F356A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 882A9D3B286A6799009F356A /* SceneDelegate.m */; };
 		882A9D3F286A6799009F356A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882A9D3E286A6799009F356A /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0831113C684F93ED27B97824 /* Pods_objcApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objcApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83841F430652CBA615E44EA8 /* Pods-objcApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcApp.release.xcconfig"; path = "Target Support Files/Pods-objcApp/Pods-objcApp.release.xcconfig"; sourceTree = "<group>"; };
 		882A9D34286A6799009F356A /* objcApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objcApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		882A9D37286A6799009F356A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		882A9D38286A6799009F356A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,6 +32,8 @@
 		882A9D46286A679A009F356A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		882A9D48286A679A009F356A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		882A9D49286A679A009F356A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		882A9D54286A6D8D009F356A /* objcApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "objcApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		AB44E4DC379FC5C3A0F3BBF4 /* Pods-objcApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcApp.debug.xcconfig"; path = "Target Support Files/Pods-objcApp/Pods-objcApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E34B7480C507695EECAE7BD /* Pods_objcApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +53,9 @@
 			children = (
 				882A9D36286A6799009F356A /* objcApp */,
 				882A9D35286A6799009F356A /* Products */,
+				BE55C82F450F298983681F6C /* Pods */,
+				BE0047A3EEC8CB0514CAA441 /* Frameworks */,
+				882A9D54286A6D8D009F356A /* objcApp-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +85,23 @@
 			path = objcApp;
 			sourceTree = "<group>";
 		};
+		BE0047A3EEC8CB0514CAA441 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0831113C684F93ED27B97824 /* Pods_objcApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE55C82F450F298983681F6C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB44E4DC379FC5C3A0F3BBF4 /* Pods-objcApp.debug.xcconfig */,
+				83841F430652CBA615E44EA8 /* Pods-objcApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,6 +109,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 882A9D4D286A679A009F356A /* Build configuration list for PBXNativeTarget "objcApp" */;
 			buildPhases = (
+				14023670E15E92ED7204C00D /* [CP] Check Pods Manifest.lock */,
 				882A9D30286A6799009F356A /* Sources */,
 				882A9D31286A6799009F356A /* Frameworks */,
 				882A9D32286A6799009F356A /* Resources */,
@@ -107,6 +134,7 @@
 				TargetAttributes = {
 					882A9D33286A6799009F356A = {
 						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -140,6 +168,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14023670E15E92ED7204C00D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-objcApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		882A9D30286A6799009F356A /* Sources */ = {
@@ -287,9 +340,11 @@
 		};
 		882A9D4E286A679A009F356A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB44E4DC379FC5C3A0F3BBF4 /* Pods-objcApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48ZGK5S53A;
@@ -308,15 +363,20 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oleksii.objcApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "objcApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		882A9D4F286A679A009F356A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83841F430652CBA615E44EA8 /* Pods-objcApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 48ZGK5S53A;
@@ -335,6 +395,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oleksii.objcApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "objcApp-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
