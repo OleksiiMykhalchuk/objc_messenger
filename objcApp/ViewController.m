@@ -23,8 +23,10 @@ NSString *user;
 - (IBAction)loginAction:(id)sender {
     user = [userDefaults stringForKey:@"user"];
     NSString *pass = [userDefaults stringForKey:@"pass"];
+    NSLog(@"%@ %@ %d %d", user, pass, _userField.text == user, _passwordField.text == pass);
     if (_userField.text == user && _passwordField.text == pass) {
         UIViewController *controller = [[self storyboard]instantiateViewControllerWithIdentifier:@"Messager"];
+        [userDefaults setBool:true forKey:@"isLoggedIn"];
         [[self navigationController] pushViewController:controller animated:true];
     } else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Wrong credantials" preferredStyle:UIAlertControllerStyleAlert];
@@ -38,15 +40,13 @@ NSString *user;
 - (void)viewDidLoad {
     [super viewDidLoad];
     userDefaults = [[NSUserDefaults alloc]init];
-    [userDefaults setObject:@"user" forKey:@"user"];
-    [userDefaults setObject:@"pass" forKey:@"pass"];
     [self setUpLoginView];
 
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    user = [userDefaults stringForKey:@"user"];
-    if (user != nil) {
+    bool isLoggedIn = [userDefaults boolForKey:@"isLoggedIn"];
+    if (isLoggedIn) {
         UIViewController *controller = [[self storyboard]instantiateViewControllerWithIdentifier:@"Messager"];
         [[self navigationController] pushViewController:controller animated:true];
     }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3E34B7480C507695EECAE7BD /* Pods_objcApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0831113C684F93ED27B97824 /* Pods_objcApp.framework */; };
 		882156D7287161A8000FFF0B /* MessagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882156D6287161A8000FFF0B /* MessagerViewController.m */; };
+		882156DD287173D9000FFF0B /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 882156DC287173D9000FFF0B /* MessageTableViewCell.m */; };
+		882156DF28717766000FFF0B /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882156DE28717766000FFF0B /* MessageCell.xib */; };
 		882A9D39286A6799009F356A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 882A9D38286A6799009F356A /* AppDelegate.m */; };
 		882A9D3C286A6799009F356A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 882A9D3B286A6799009F356A /* SceneDelegate.m */; };
 		882A9D3F286A6799009F356A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882A9D3E286A6799009F356A /* ViewController.m */; };
@@ -23,6 +25,9 @@
 		83841F430652CBA615E44EA8 /* Pods-objcApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcApp.release.xcconfig"; path = "Target Support Files/Pods-objcApp/Pods-objcApp.release.xcconfig"; sourceTree = "<group>"; };
 		882156D5287161A8000FFF0B /* MessagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagerViewController.h; sourceTree = "<group>"; };
 		882156D6287161A8000FFF0B /* MessagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagerViewController.m; sourceTree = "<group>"; };
+		882156DB287173D9000FFF0B /* MessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		882156DC287173D9000FFF0B /* MessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
+		882156DE28717766000FFF0B /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		882A9D34286A6799009F356A /* objcApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objcApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		882A9D37286A6799009F356A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		882A9D38286A6799009F356A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -86,6 +91,9 @@
 				882A9D49286A679A009F356A /* main.m */,
 				882156D5287161A8000FFF0B /* MessagerViewController.h */,
 				882156D6287161A8000FFF0B /* MessagerViewController.m */,
+				882156DB287173D9000FFF0B /* MessageTableViewCell.h */,
+				882156DC287173D9000FFF0B /* MessageTableViewCell.m */,
+				882156DE28717766000FFF0B /* MessageCell.xib */,
 			);
 			path = objcApp;
 			sourceTree = "<group>";
@@ -167,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				882A9D47286A679A009F356A /* LaunchScreen.storyboard in Resources */,
+				882156DF28717766000FFF0B /* MessageCell.xib in Resources */,
 				882A9D44286A679A009F356A /* Assets.xcassets in Resources */,
 				882A9D42286A6799009F356A /* Main.storyboard in Resources */,
 			);
@@ -209,6 +218,7 @@
 				882A9D4A286A679A009F356A /* main.m in Sources */,
 				882A9D3C286A6799009F356A /* SceneDelegate.m in Sources */,
 				882156D7287161A8000FFF0B /* MessagerViewController.m in Sources */,
+				882156DD287173D9000FFF0B /* MessageTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

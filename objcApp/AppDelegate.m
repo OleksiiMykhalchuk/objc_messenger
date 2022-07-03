@@ -13,9 +13,11 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
+    [userDefaults setObject:@"user" forKey:@"user"];
+    [userDefaults setObject:@"pass" forKey:@"pass"];
     return YES;
 }
 
