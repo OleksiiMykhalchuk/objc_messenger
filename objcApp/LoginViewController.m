@@ -5,9 +5,9 @@
 //  Created by Oleksii Mykhalchuk on 6/28/22.
 //
 
-#import "ViewController.h"
+#import "LoginViewController.h"
 
-@interface ViewController ()
+@interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UITextField *userField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -15,7 +15,7 @@
 
 @end
 
-@implementation ViewController
+@implementation LoginViewController
 
 NSUserDefaults *userDefaults;
 NSString *user;
@@ -23,7 +23,6 @@ NSString *user;
 - (IBAction)loginAction:(id)sender {
     user = [userDefaults stringForKey:@"user"];
     NSString *pass = [userDefaults stringForKey:@"pass"];
-    NSLog(@"%@ %@ %d %d", user, pass, _userField.text == user, _passwordField.text == pass);
     if (_userField.text == user && _passwordField.text == pass) {
         UIViewController *controller = [[self storyboard]instantiateViewControllerWithIdentifier:@"Messager"];
         [userDefaults setBool:true forKey:@"isLoggedIn"];
@@ -40,7 +39,7 @@ NSString *user;
 - (void)viewDidLoad {
     [super viewDidLoad];
     userDefaults = [[NSUserDefaults alloc]init];
-    [self setUpLoginView];
+    [self setupLoginView];
 
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,7 +50,7 @@ NSString *user;
         [[self navigationController] pushViewController:controller animated:true];
     }
 }
--(void)setUpLoginView {
+-(void)setupLoginView {
     _loginView.layer.cornerRadius = 20;
     _loginView.layer.shadowColor = UIColor.systemBrownColor.CGColor;
     _loginView.layer.shadowRadius = 10;

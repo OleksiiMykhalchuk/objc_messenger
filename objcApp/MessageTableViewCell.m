@@ -20,7 +20,6 @@
     _messageView.layer.cornerRadius = 10;
     _messageView.backgroundColor = UIColor.whiteColor;
     _messageView.layer.opacity = 0.8;
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

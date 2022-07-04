@@ -11,6 +11,7 @@
 @interface MessagerViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @end
 
@@ -24,23 +25,52 @@
 
 NSString *messages[];
 int count = 1;
+NSLayoutConstraint *constraint;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Messager";
+    self.title = @"Messanger";
     UINib *nib = [UINib nibWithNibName:@"MessageCell" bundle:nil];
     [_tableView registerNib:nib forCellReuseIdentifier:@"default"];
     _tableView.dataSource = self;
     [_textField addTarget:self action:@selector(addMessage) forControlEvents:UIControlEventEditingDidEndOnExit];
     messages[0] = @"Message 4";
-    [_textField becomeFirstResponder];
+//    [_textField becomeFirstResponder];
     _textField.layer.borderWidth = 1;
     _textField.layer.cornerRadius = 10;
+    _textField.frame = CGRectMake(_bottomView.frame.origin.x,
+                                        _bottomView.frame.origin.y + 330,
+                                        _bottomView.frame.size.width,
+                                        _bottomView.frame.size.height + 330);
+    constraint.identifier = @"bottom";
+    constraint.constant = 220;
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide) name:UIKeyboardDidHideNotification object:nil];
+}
+- (void)keyboardDidShow {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationsEnabled:YES];
+    [UIView setAnimationDuration:0.3];
+    _textField.frame = CGRectMake(
+                                   _bottomView.frame.origin.x,
+                                   _bottomView.frame.origin.y + 330,
+                                   _bottomView.frame.size.width,
+                                   _bottomView.frame.size.height);
+    [UIView commitAnimations];
+}
+- (void)keyboardDidHide {
+    _textField.frame = CGRectMake(
+                                   _bottomView.frame.origin.x,
+                                   _bottomView.frame.origin.y - 330,
+                                   _bottomView.frame.size.width,
+                                   _bottomView.frame.size.height);
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    UILayoutGuide *key = [[UILayoutGuide alloc]init];
-    NSLog(@"%@", key);
+    CGAffineTransform trans = [_bottomView transform];
+    trans.tx = 330;
+    trans.ty = 330;
+    trans.a = 300;
 }
 -(void)addMessage {
     messages[count] = _textField.text;
@@ -51,6 +81,8 @@ int count = 1;
     [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
     NSLog(@"addMessage");
     _textField.text = @"";
+
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
