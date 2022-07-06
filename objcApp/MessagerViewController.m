@@ -40,13 +40,12 @@ NSLayoutConstraint *constraint;
     _tableView.dataSource = self;
     [_textField addTarget:self action:@selector(addMessage) forControlEvents:UIControlEventEditingDidEndOnExit];
     messages[0] = @"Message 4";
-    [_textField becomeFirstResponder];
     _textField.layer.borderWidth = 1;
     _textField.layer.cornerRadius = 10;
     [self textFieldSetup];
     [self tableViewSetup];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 - (void)textFieldSetup {
     _textField.translatesAutoresizingMaskIntoConstraints = false;
@@ -92,7 +91,7 @@ NSLayoutConstraint *constraint;
         self.view.frame = viewFrame;
     };
 
-    [UIView animateWithDuration:animationDuration delay:1.0 options:UIViewAnimationOptionBeginFromCurrentState animations:animations completion:nil];
+    [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:animations completion:nil];
 
     NSLog(@"keyBoardDidShow");
 }
