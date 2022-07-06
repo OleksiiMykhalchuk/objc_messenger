@@ -11,11 +11,16 @@
 @interface MessagerViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
+//@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @end
 
 @implementation MessagerViewController
+
+NSLayoutConstraint *topConstraint;
+NSLayoutConstraint *bottomCondtraint;
+NSLayoutConstraint *topConstraintWithKeyboard;
+NSLayoutConstraint *bottomCondtraintWithKeyboard;
 
 - (IBAction)logOut:(id)sender {
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc]init];
@@ -35,42 +40,93 @@ NSLayoutConstraint *constraint;
     _tableView.dataSource = self;
     [_textField addTarget:self action:@selector(addMessage) forControlEvents:UIControlEventEditingDidEndOnExit];
     messages[0] = @"Message 4";
-//    [_textField becomeFirstResponder];
+    [_textField becomeFirstResponder];
     _textField.layer.borderWidth = 1;
     _textField.layer.cornerRadius = 10;
-    _textField.frame = CGRectMake(_bottomView.frame.origin.x,
-                                        _bottomView.frame.origin.y + 330,
-                                        _bottomView.frame.size.width,
-                                        _bottomView.frame.size.height + 330);
-    constraint.identifier = @"bottom";
-    constraint.constant = 220;
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide) name:UIKeyboardDidHideNotification object:nil];
+    [self textFieldSetup];
+    [self tableViewSetup];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
-- (void)keyboardDidShow {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationsEnabled:YES];
-    [UIView setAnimationDuration:0.3];
-    _textField.frame = CGRectMake(
-                                   _bottomView.frame.origin.x,
-                                   _bottomView.frame.origin.y + 330,
-                                   _bottomView.frame.size.width,
-                                   _bottomView.frame.size.height);
-    [UIView commitAnimations];
+- (void)textFieldSetup {
+    _textField.translatesAutoresizingMaskIntoConstraints = false;
+    topConstraint = [_textField.topAnchor constraintEqualToAnchor:_tableView.bottomAnchor constant:10 ];
+    topConstraint.active = true;
+    bottomCondtraint = [_textField.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor  constant:-60];
+    bottomCondtraint.active = true;
+    [_textField.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:10].active = true;
+    [_textField.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-10].active = true;
+
+    [self.view bringSubviewToFront:_textField];
 }
-- (void)keyboardDidHide {
-    _textField.frame = CGRectMake(
-                                   _bottomView.frame.origin.x,
-                                   _bottomView.frame.origin.y - 330,
-                                   _bottomView.frame.size.width,
-                                   _bottomView.frame.size.height);
+- (void)tableViewSetup {
+    _tableView.translatesAutoresizingMaskIntoConstraints = false;
+    [_tableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:0].active = true;
+    [_tableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:0].active = true;
+    [_tableView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
+    [_tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-110].active = true;
+}
+- (void)keyboardDidShow: (NSNotification*)notification {
+    NSDictionary *userInfo = notification.userInfo;
+
+    NSValue *beginFrameValue = userInfo[UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardBeginFrame = [self.view convertRect:beginFrameValue.CGRectValue toView:nil];
+
+    NSValue *endFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardEndFrame = [self.view convertRect:endFrameValue.CGRectValue toView:nil];
+
+    NSNumber *durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration = durationValue.doubleValue;
+
+    NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    UIViewAnimationCurve animationCurve = curveValue.intValue;
+
+    CGRect viewFrame = self.view.frame;
+    viewFrame.size.height = keyboardBeginFrame.origin.y - viewFrame.origin.y;
+    self.view.frame = viewFrame;
+
+    void (^animations)(void) = ^() {
+
+        CGRect viewFrame = self.view.frame;
+        viewFrame.size.height = keyboardEndFrame.origin.y - viewFrame.origin.y;
+        self.view.frame = viewFrame;
+    };
+
+    [UIView animateWithDuration:animationDuration delay:1.0 options:UIViewAnimationOptionBeginFromCurrentState animations:animations completion:nil];
+
+    NSLog(@"keyBoardDidShow");
+}
+- (void)keyboardDidHide:(NSNotification*)notification {
+    NSDictionary *userInfo = notification.userInfo;
+
+    NSValue *beginFrameValue = userInfo[UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardBeginFrame = [self.view convertRect:beginFrameValue.CGRectValue toView:nil];
+
+    NSValue *endFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardEndFrame = [self.view convertRect:endFrameValue.CGRectValue toView:nil];
+
+    NSNumber *durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration = durationValue.doubleValue;
+
+    NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    UIViewAnimationCurve animationCurve = curveValue.intValue;
+
+    CGRect viewFrame = self.view.frame;
+    viewFrame.size.height = keyboardBeginFrame.origin.y - viewFrame.origin.y;
+    self.view.frame = viewFrame;
+
+    void (^animations)(void) = ^() {
+        CGRect viewFrame = self.view.frame;
+        viewFrame.size.height = keyboardEndFrame.origin.y - viewFrame.origin.y;
+        self.view.frame = viewFrame;
+    };
+
+    [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:animations completion:nil];
+
+    NSLog(@"keyBoardDidHide");
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    CGAffineTransform trans = [_bottomView transform];
-    trans.tx = 330;
-    trans.ty = 330;
-    trans.a = 300;
 }
 -(void)addMessage {
     messages[count] = _textField.text;
@@ -81,8 +137,6 @@ NSLayoutConstraint *constraint;
     [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
     NSLog(@"addMessage");
     _textField.text = @"";
-
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

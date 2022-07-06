@@ -100,38 +100,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="m3E-uO-u7J">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="m3E-uO-u7J">
                                 <rect key="frame" x="20" y="808" width="374" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="nFA-cB-gkq"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bS6-Iv-NcN">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bS6-Iv-NcN">
                                 <rect key="frame" x="0.0" y="88" width="414" height="700"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbe-f0-yIE">
-                                <rect key="frame" x="0.0" y="842" width="414" height="54"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ldf-jE-aG8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="bS6-Iv-NcN" firstAttribute="leading" secondItem="ldf-jE-aG8" secondAttribute="leading" id="2Oe-34-5Fl"/>
-                            <constraint firstItem="ldf-jE-aG8" firstAttribute="bottom" secondItem="m3E-uO-u7J" secondAttribute="bottom" constant="20" identifier="bottom" id="6g2-63-mWO"/>
-                            <constraint firstItem="m3E-uO-u7J" firstAttribute="top" secondItem="bS6-Iv-NcN" secondAttribute="bottom" constant="20" id="8Rt-VN-OKf"/>
-                            <constraint firstItem="gbe-f0-yIE" firstAttribute="top" secondItem="m3E-uO-u7J" secondAttribute="bottom" id="Ddf-OT-Tpu"/>
-                            <constraint firstItem="gbe-f0-yIE" firstAttribute="leading" secondItem="ldf-jE-aG8" secondAttribute="leading" id="IKS-kD-aKB"/>
-                            <constraint firstItem="bS6-Iv-NcN" firstAttribute="top" secondItem="ldf-jE-aG8" secondAttribute="top" id="P9J-Fb-Y9F"/>
-                            <constraint firstItem="ldf-jE-aG8" firstAttribute="trailing" secondItem="bS6-Iv-NcN" secondAttribute="trailing" id="T7W-4b-Cnc"/>
-                            <constraint firstItem="ldf-jE-aG8" firstAttribute="trailing" secondItem="m3E-uO-u7J" secondAttribute="trailing" constant="20" id="ex4-tV-6MW"/>
-                            <constraint firstAttribute="bottom" secondItem="gbe-f0-yIE" secondAttribute="bottom" id="mZK-DY-4Kc"/>
-                            <constraint firstItem="ldf-jE-aG8" firstAttribute="trailing" secondItem="gbe-f0-yIE" secondAttribute="trailing" id="o9Z-zG-DO4"/>
-                            <constraint firstItem="m3E-uO-u7J" firstAttribute="leading" secondItem="ldf-jE-aG8" secondAttribute="leading" constant="20" id="wpR-Gt-LmN"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="zW5-Ze-frI">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="kG5-qB-clu">
@@ -141,7 +123,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bottomView" destination="gbe-f0-yIE" id="bk7-Ri-x72"/>
                         <outlet property="tableView" destination="bS6-Iv-NcN" id="jsm-wg-3Tc"/>
                         <outlet property="textField" destination="m3E-uO-u7J" id="86Q-pK-Hkx"/>
                     </connections>
