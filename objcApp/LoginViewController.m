@@ -23,7 +23,7 @@ NSString *user;
 - (IBAction)loginAction:(id)sender {
     user = [userDefaults stringForKey:@"user"];
     NSString *pass = [userDefaults stringForKey:@"pass"];
-    if (_userField.text == user && _passwordField.text == pass) {
+    if ([self.userField.text isEqualToString:user] && [self.passwordField.text isEqualToString:pass]) {
         UIViewController *controller = [[self storyboard]instantiateViewControllerWithIdentifier:@"Messager"];
         [userDefaults setBool:true forKey:@"isLoggedIn"];
         [[self navigationController] pushViewController:controller animated:true];

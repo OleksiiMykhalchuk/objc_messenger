@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) NSLayoutConstraint *bottomViewConstraint;
 
 @end
 
@@ -56,7 +57,8 @@ NSLayoutConstraint *constraint;
 -(void)bottomViewSetup {
     _bottomView.translatesAutoresizingMaskIntoConstraints = false;
     [_bottomView.topAnchor constraintEqualToAnchor:_tableView.bottomAnchor constant:0].active = true;
-    [_bottomView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0].active = true;
+    _bottomViewConstraint = [_bottomView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0];
+    _bottomViewConstraint.active = true;
     [_bottomView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:0].active = true;
     [_bottomView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:0].active = true;
 }
@@ -64,8 +66,8 @@ NSLayoutConstraint *constraint;
     _textField.translatesAutoresizingMaskIntoConstraints = false;
     topConstraint = [_textField.topAnchor constraintEqualToAnchor:_bottomView.topAnchor constant:20 ];
     topConstraint.active = true;
-    bottomCondtraint = [_textField.bottomAnchor constraintEqualToAnchor:_bottomView.bottomAnchor  constant:10];
-//    bottomCondtraint.active = true;
+    bottomCondtraint = [_textField.bottomAnchor constraintEqualToAnchor:_bottomView.bottomAnchor  constant:-60];
+    bottomCondtraint.active = true;
     [_textField.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:10].active = true;
     [_textField.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-10].active = true;
 
@@ -76,10 +78,10 @@ NSLayoutConstraint *constraint;
     [_tableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:0].active = true;
     [_tableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:0].active = true;
     [_tableView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
-    [_tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-110].active = true;
+//    [_tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-110].active = true;
 }
 - (void)keyboardDidShow: (NSNotification*)notification {
-    if (!isKeyboardPressented) {
+
         NSDictionary *userInfo = notification.userInfo;
 
         NSValue *beginFrameValue = userInfo[UIKeyboardFrameBeginUserInfoKey];
@@ -94,24 +96,26 @@ NSLayoutConstraint *constraint;
         NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
         UIViewAnimationCurve animationCurve = curveValue.intValue;
 
-        CGRect viewFrame = self->_bottomView.frame;
-        viewFrame.origin.y = keyboardBeginFrame.origin.y - viewFrame.size.height;
-        self->_bottomView.frame = viewFrame;
+//        CGRect viewFrame = self->_bottomView.frame;
+//        viewFrame.origin.y = keyboardBeginFrame.origin.y - viewFrame.size.height;
+//        self->_bottomView.frame = viewFrame;
 
         CGSize keyboardSize = [[[notification userInfo]objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue].size;
+    _bottomViewConstraint.constant = -keyboardEndFrame.size.height;
 
         void (^animations)(void) = ^() {
 
-            CGRect viewFrame = self->_bottomView.frame;
+//            CGRect viewFrame = self->_bottomView.frame;
     //        viewFrame.size.height = keyboardEndFrame.origin.y - viewFrame.origin.y;
-            viewFrame.origin.y =  keyboardEndFrame.origin.y - viewFrame.size.height;
-            self->_bottomView.frame = viewFrame;
+//            viewFrame.origin.y =  keyboardEndFrame.origin.y - viewFrame.size.height;
+//            self->_bottomView.frame = viewFrame;
+            [self.view layoutIfNeeded];
         };
 
         [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:animations completion:nil];
 
         NSLog(@"keyBoardDidShow");
-    }
+
 }
 - (void)keyboardDidHide:(NSNotification*)notification {
     NSDictionary *userInfo = notification.userInfo;
@@ -132,11 +136,14 @@ NSLayoutConstraint *constraint;
 //    viewFrame.size.height = keyboardBeginFrame.origin.y - viewFrame.origin.y;
 //    self.view.frame = viewFrame;
 
+    _bottomViewConstraint.constant = 0;
+
     void (^animations)(void) = ^() {
-        CGRect viewFrame = self->_bottomView.frame;
-//        viewFrame.size.height = keyboardEndFrame.origin.y - viewFrame.origin.y;
-        viewFrame.origin.y = 0.0f;
-        self->_bottomView.frame = viewFrame;
+//        CGRect viewFrame = self->_bottomView.frame;
+////        viewFrame.size.height = keyboardEndFrame.origin.y - viewFrame.origin.y;
+//        viewFrame.origin.y = 0.0f;
+//        self->_bottomView.frame = viewFrame;
+        [self.view layoutIfNeeded];
     };
 
     [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:animations completion:nil];
