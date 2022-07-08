@@ -5,21 +5,18 @@
 //  Created by Oleksii Mykhalchuk on 7/3/22.
 //
 
-#import "MessageTableViewCell.h"
+#import "MessengeTableViewCell.h"
 
-@interface MessageTableViewCell()
+@interface MessengeTableViewCell()
 //@property (weak, nonatomic) IBOutlet UILabel *message;
 @end
 
-@implementation MessageTableViewCell
+@implementation MessengeTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    _messageView.layer.borderWidth = 1;
-    _messageView.layer.cornerRadius = 10;
-    _messageView.backgroundColor = UIColor.whiteColor;
-    _messageView.layer.opacity = 0.8;
+    _messageView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

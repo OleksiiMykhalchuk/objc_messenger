@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3E34B7480C507695EECAE7BD /* Pods_objcApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0831113C684F93ED27B97824 /* Pods_objcApp.framework */; };
-		882156D7287161A8000FFF0B /* MessagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882156D6287161A8000FFF0B /* MessagerViewController.m */; };
-		882156DD287173D9000FFF0B /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 882156DC287173D9000FFF0B /* MessageTableViewCell.m */; };
+		8818539228782F53004006F5 /* SenderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8818539028782F53004006F5 /* SenderTableViewCell.m */; };
+		8818539328782F53004006F5 /* SenderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8818539128782F53004006F5 /* SenderTableViewCell.xib */; };
+		882156D7287161A8000FFF0B /* MessengerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882156D6287161A8000FFF0B /* MessengerViewController.m */; };
+		882156DD287173D9000FFF0B /* MessengeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 882156DC287173D9000FFF0B /* MessengeTableViewCell.m */; };
 		882156DF28717766000FFF0B /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882156DE28717766000FFF0B /* MessageCell.xib */; };
 		882A9D39286A6799009F356A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 882A9D38286A6799009F356A /* AppDelegate.m */; };
 		882A9D3C286A6799009F356A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 882A9D3B286A6799009F356A /* SceneDelegate.m */; };
@@ -23,10 +25,13 @@
 /* Begin PBXFileReference section */
 		0831113C684F93ED27B97824 /* Pods_objcApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objcApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83841F430652CBA615E44EA8 /* Pods-objcApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcApp.release.xcconfig"; path = "Target Support Files/Pods-objcApp/Pods-objcApp.release.xcconfig"; sourceTree = "<group>"; };
-		882156D5287161A8000FFF0B /* MessagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagerViewController.h; sourceTree = "<group>"; };
-		882156D6287161A8000FFF0B /* MessagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagerViewController.m; sourceTree = "<group>"; };
-		882156DB287173D9000FFF0B /* MessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
-		882156DC287173D9000FFF0B /* MessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
+		8818538F28782F53004006F5 /* SenderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SenderTableViewCell.h; sourceTree = "<group>"; };
+		8818539028782F53004006F5 /* SenderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SenderTableViewCell.m; sourceTree = "<group>"; };
+		8818539128782F53004006F5 /* SenderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderTableViewCell.xib; sourceTree = "<group>"; };
+		882156D5287161A8000FFF0B /* MessengerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessengerViewController.h; sourceTree = "<group>"; };
+		882156D6287161A8000FFF0B /* MessengerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessengerViewController.m; sourceTree = "<group>"; };
+		882156DB287173D9000FFF0B /* MessengeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessengeTableViewCell.h; sourceTree = "<group>"; };
+		882156DC287173D9000FFF0B /* MessengeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessengeTableViewCell.m; sourceTree = "<group>"; };
 		882156DE28717766000FFF0B /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		882A9D34286A6799009F356A /* objcApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objcApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		882A9D37286A6799009F356A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,11 +94,14 @@
 				882A9D45286A679A009F356A /* LaunchScreen.storyboard */,
 				882A9D48286A679A009F356A /* Info.plist */,
 				882A9D49286A679A009F356A /* main.m */,
-				882156D5287161A8000FFF0B /* MessagerViewController.h */,
-				882156D6287161A8000FFF0B /* MessagerViewController.m */,
-				882156DB287173D9000FFF0B /* MessageTableViewCell.h */,
-				882156DC287173D9000FFF0B /* MessageTableViewCell.m */,
+				882156D5287161A8000FFF0B /* MessengerViewController.h */,
+				882156D6287161A8000FFF0B /* MessengerViewController.m */,
+				882156DB287173D9000FFF0B /* MessengeTableViewCell.h */,
+				882156DC287173D9000FFF0B /* MessengeTableViewCell.m */,
 				882156DE28717766000FFF0B /* MessageCell.xib */,
+				8818538F28782F53004006F5 /* SenderTableViewCell.h */,
+				8818539028782F53004006F5 /* SenderTableViewCell.m */,
+				8818539128782F53004006F5 /* SenderTableViewCell.xib */,
 			);
 			path = objcApp;
 			sourceTree = "<group>";
@@ -174,6 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8818539328782F53004006F5 /* SenderTableViewCell.xib in Resources */,
 				882A9D47286A679A009F356A /* LaunchScreen.storyboard in Resources */,
 				882156DF28717766000FFF0B /* MessageCell.xib in Resources */,
 				882A9D44286A679A009F356A /* Assets.xcassets in Resources */,
@@ -213,12 +222,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8818539228782F53004006F5 /* SenderTableViewCell.m in Sources */,
 				882A9D3F286A6799009F356A /* LoginViewController.m in Sources */,
 				882A9D39286A6799009F356A /* AppDelegate.m in Sources */,
 				882A9D4A286A679A009F356A /* main.m in Sources */,
 				882A9D3C286A6799009F356A /* SceneDelegate.m in Sources */,
-				882156D7287161A8000FFF0B /* MessagerViewController.m in Sources */,
-				882156DD287173D9000FFF0B /* MessageTableViewCell.m in Sources */,
+				882156D7287161A8000FFF0B /* MessengerViewController.m in Sources */,
+				882156DD287173D9000FFF0B /* MessengeTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,18 +5,20 @@
 //  Created by Oleksii Mykhalchuk on 7/3/22.
 //
 
-#import "MessagerViewController.h"
-#import "MessageTableViewCell.h"
+#import "MessengerViewController.h"
+#import "MessengeTableViewCell.h"
+#import "SenderTableViewCell.h"
 
-@interface MessagerViewController ()
+@interface MessengerViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) NSLayoutConstraint *bottomViewConstraint;
+@property (weak, nonatomic) IBOutlet UISwitch *switchButton;
 
 @end
 
-@implementation MessagerViewController
+@implementation MessengerViewController
 
 NSLayoutConstraint *topConstraint;
 NSLayoutConstraint *bottomCondtraint;
@@ -29,26 +31,34 @@ bool isKeyboardPressented = false;
     [userDefaults setBool:false forKey:@"isLoggedIn"];
     [[self navigationController]popViewControllerAnimated:true];
 }
+-(IBAction)senderReceiverSwitch:(id)sender {
+    NSLog(@"%d", self.switchButton.isOn);
+}
 
-NSString *messages[];
-int count = 1;
+NSMutableArray *messages;
+NSArray *reversed;
 NSLayoutConstraint *constraint;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Messanger";
+    self.title = @"Messenger";
     UINib *nib = [UINib nibWithNibName:@"MessageCell" bundle:nil];
     [_tableView registerNib:nib forCellReuseIdentifier:@"default"];
+    nib = [UINib nibWithNibName:@"SenderTableViewCell" bundle:nil];
+    [_tableView registerNib:nib forCellReuseIdentifier:@"sender"];
     _tableView.dataSource = self;
     [_textField addTarget:self action:@selector(addMessage) forControlEvents:UIControlEventEditingDidEndOnExit];
-    messages[0] = @"Message 4";
+    messages = [[NSMutableArray alloc]init];
+
+    [messages addObject:@"Message 4"];
     _textField.layer.borderWidth = 1;
     _textField.layer.cornerRadius = 10;
     [self textFieldSetup];
     [self tableViewSetup];
     [self bottomViewSetup];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+    [self switchButtonSetup];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -69,18 +79,24 @@ NSLayoutConstraint *constraint;
     bottomCondtraint = [_textField.bottomAnchor constraintEqualToAnchor:_bottomView.bottomAnchor  constant:-60];
     bottomCondtraint.active = true;
     [_textField.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:10].active = true;
-    [_textField.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-10].active = true;
+    [_textField.trailingAnchor constraintEqualToAnchor:_switchButton.leadingAnchor constant:-10].active = true;
 
     [self.view bringSubviewToFront:_textField];
+}
+- (void)switchButtonSetup {
+    _switchButton.translatesAutoresizingMaskIntoConstraints = false;
+    [_switchButton.topAnchor constraintEqualToAnchor:_bottomView.topAnchor constant:20].active = true;
+    [_switchButton.trailingAnchor constraintEqualToAnchor:_bottomView.trailingAnchor constant:-10].active = true;
 }
 - (void)tableViewSetup {
     _tableView.translatesAutoresizingMaskIntoConstraints = false;
     [_tableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:0].active = true;
     [_tableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:0].active = true;
     [_tableView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
-//    [_tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-110].active = true;
+
+    _tableView.transform = CGAffineTransformMakeScale(1, -1);
 }
-- (void)keyboardDidShow: (NSNotification*)notification {
+- (void)keyboardWillShow: (NSNotification*)notification {
 
         NSDictionary *userInfo = notification.userInfo;
 
@@ -96,19 +112,11 @@ NSLayoutConstraint *constraint;
         NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
         UIViewAnimationCurve animationCurve = curveValue.intValue;
 
-//        CGRect viewFrame = self->_bottomView.frame;
-//        viewFrame.origin.y = keyboardBeginFrame.origin.y - viewFrame.size.height;
-//        self->_bottomView.frame = viewFrame;
 
         CGSize keyboardSize = [[[notification userInfo]objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue].size;
     _bottomViewConstraint.constant = -keyboardEndFrame.size.height;
 
         void (^animations)(void) = ^() {
-
-//            CGRect viewFrame = self->_bottomView.frame;
-    //        viewFrame.size.height = keyboardEndFrame.origin.y - viewFrame.origin.y;
-//            viewFrame.origin.y =  keyboardEndFrame.origin.y - viewFrame.size.height;
-//            self->_bottomView.frame = viewFrame;
             [self.view layoutIfNeeded];
         };
 
@@ -117,7 +125,7 @@ NSLayoutConstraint *constraint;
         NSLog(@"keyBoardDidShow");
 
 }
-- (void)keyboardDidHide:(NSNotification*)notification {
+- (void)keyboardWillHide:(NSNotification*)notification {
     NSDictionary *userInfo = notification.userInfo;
 
     NSValue *beginFrameValue = userInfo[UIKeyboardFrameBeginUserInfoKey];
@@ -132,17 +140,9 @@ NSLayoutConstraint *constraint;
     NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
     UIViewAnimationCurve animationCurve = curveValue.intValue;
 
-//    CGRect viewFrame = self.view.frame;
-//    viewFrame.size.height = keyboardBeginFrame.origin.y - viewFrame.origin.y;
-//    self.view.frame = viewFrame;
-
     _bottomViewConstraint.constant = 0;
 
     void (^animations)(void) = ^() {
-//        CGRect viewFrame = self->_bottomView.frame;
-////        viewFrame.size.height = keyboardEndFrame.origin.y - viewFrame.origin.y;
-//        viewFrame.origin.y = 0.0f;
-//        self->_bottomView.frame = viewFrame;
         [self.view layoutIfNeeded];
     };
 
@@ -155,25 +155,51 @@ NSLayoutConstraint *constraint;
     [super viewDidAppear:animated];
 }
 -(void)addMessage {
-    messages[count] = _textField.text;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[messages count] inSection:0];
 
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)(count) inSection:0];
+    [messages addObject: _textField.text];
     NSArray *indexPaths = @[indexPath];
-    count += 1;
-    [_tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationLeft];
+    reversed = [[indexPaths reverseObjectEnumerator]allObjects];
+    [_tableView insertRowsAtIndexPaths:reversed withRowAnimation:UITableViewRowAnimationLeft];
     NSLog(@"addMessage");
     _textField.text = @"";
 }
+-(void)reverseArray:(NSString*)array {
+
+}
+- (void)updateTableContentInset {
+    NSInteger numRows = [self.tableView numberOfRowsInSection:0];
+    CGFloat contentInsetTop = self.tableView.bounds.size.height;
+    for (NSInteger i = 0; i < numRows; i++) {
+        contentInsetTop -= [self tableView:self.tableView heightForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        if (contentInsetTop <= 0) {
+            contentInsetTop = 0;
+            break;
+        }
+    }
+    self.tableView.contentInset = UIEdgeInsetsMake(contentInsetTop, 0, 0, 0);
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageTableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"default" forIndexPath:indexPath];
-    cell.message.text = messages[indexPath.row];
-    cell.userInteractionEnabled = false;
-    cell.backgroundColor = UIColor.systemCyanColor;
-    return cell;
+    if (!self.switchButton.isOn) {
+        MessengeTableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"default" forIndexPath:indexPath];
+        cell.message.text = [messages objectAtIndex: indexPath.row];
+        cell.userInteractionEnabled = false;
+
+        cell.contentView.transform = CGAffineTransformMakeScale(1, -1);
+
+        return cell;
+    } else {
+        SenderTableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"sender" forIndexPath:indexPath];
+        cell.message.text = [messages objectAtIndex: indexPath.row];
+        cell.userInteractionEnabled = false;
+
+        cell.contentView.transform = CGAffineTransformMakeScale(1, -1);
+        return cell;
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return count;
+    return [messages count];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
